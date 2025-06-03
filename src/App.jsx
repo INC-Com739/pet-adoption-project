@@ -74,16 +74,16 @@ function App() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '40px auto', background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', padding: 24 }}>
-      <h1 style={{ fontSize: '2em', marginBottom: 16 }}>Pet Adoption</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
+    <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-8 mt-10">
+      <h1 className="text-3xl font-bold mb-6 text-center text-blue-700">Pet Adoption</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
         <input
           name="name"
           placeholder="Pet Name"
           value={form.name}
           onChange={handleChange}
           required
-          style={{ padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
+          className="p-2 border border-gray-300 rounded"
         />
         <input
           name="type"
@@ -91,7 +91,7 @@ function App() {
           value={form.type}
           onChange={handleChange}
           required
-          style={{ padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
+          className="p-2 border border-gray-300 rounded"
         />
         <input
           name="age"
@@ -101,23 +101,23 @@ function App() {
           required
           type="number"
           min="0"
-          style={{ padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
+          className="p-2 border border-gray-300 rounded"
         />
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button type="submit" style={{ flex: 1 }}>{editId === null ? 'Add Pet' : 'Update Pet'}</button>
+        <div className="flex gap-2">
+          <button type="submit" className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">{editId === null ? 'Add Pet' : 'Update Pet'}</button>
           {editId !== null && (
-            <button type="button" onClick={() => { setEditId(null); setForm({ name: '', type: '', age: '' }) }} style={{ flex: 1, background: '#eee', color: '#333' }}>Cancel</button>
+            <button type="button" onClick={() => { setEditId(null); setForm({ name: '', type: '', age: '' }) }} className="flex-1 bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition">Cancel</button>
           )}
         </div>
       </form>
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-        {pets.length === 0 && <li style={{ color: '#888' }}>No pets yet.</li>}
+      <ul className="list-none p-0 m-0">
+        {pets.length === 0 && <li className="text-gray-400 text-center">No pets yet.</li>}
         {pets.map(pet => (
-          <li key={pet.id} style={{ marginBottom: 12, border: '1px solid #eee', padding: 12, borderRadius: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <li key={pet.id} className="mb-4 border border-gray-200 p-4 rounded flex justify-between items-center">
             <span><strong>{pet.name}</strong> ({pet.type}, Age: {pet.age})</span>
             <span>
-              <button onClick={() => handleEdit(pet)} style={{ marginRight: 8 }}>Edit</button>
-              <button onClick={() => handleDelete(pet.id)} style={{ background: '#f66', color: '#fff' }}>Delete</button>
+              <button onClick={() => handleEdit(pet)} className="mr-2 px-3 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition">Edit</button>
+              <button onClick={() => handleDelete(pet.id)} className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">Delete</button>
             </span>
           </li>
         ))}
