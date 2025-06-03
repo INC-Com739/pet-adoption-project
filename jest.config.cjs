@@ -8,4 +8,9 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'jsx'],
   setupFilesAfterEnv: ['./jest.setup.js'],
+  moduleNameMapper: {
+    // Mock Vite's absolute import for vite.svg
+    '^/vite.svg$': '<rootDir>/src/assets/react.svg',
+    '^.+\\.(css|scss|sass)$': '<rootDir>/styleMock.cjs',
+  },
 };

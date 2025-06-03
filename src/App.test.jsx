@@ -1,3 +1,4 @@
+const React = require('react');
 const { render, screen } = require('@testing-library/react');
 const App = require('./App.jsx').default;
 
