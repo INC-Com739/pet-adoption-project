@@ -1,47 +1,46 @@
-const React = require('react');
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
 function App() {
   // Pet state: array of pet objects { id, name, type, age }
-  const [pets, setPets] = useState([])
+  const [pets, setPets] = useState([]);
   // Form state
-  const [form, setForm] = useState({ name: '', type: '', age: '' })
+  const [form, setForm] = useState({ name: '', type: '', age: '' });
   // Edit mode state
-  const [editId, setEditId] = useState(null)
+  const [editId, setEditId] = useState(null);
 
   // Handle form input changes
   function handleChange(e) {
-    const { name, value } = e.target
-    setForm(f => ({ ...f, [name]: value }))
+    const { name, value } = e.target;
+    setForm(f => ({ ...f, [name]: value }));
   }
 
   // Handle form submit for create or update
   function handleSubmit(e) {
-    e.preventDefault()
-    if (!form.name || !form.type || !form.age) return
+    e.preventDefault();
+    if (!form.name || !form.type || !form.age) return;
     if (editId === null) {
       // Create
       setPets(pets => [
         ...pets,
         { id: Date.now(), name: form.name, type: form.type, age: form.age }
-      ])
+      ]);
     } else {
       // Update
       setPets(pets => pets.map(p =>
         p.id === editId ? { ...p, ...form } : p
-      ))
-      setEditId(null)
+      ));
+      setEditId(null);
     }
-    setForm({ name: '', type: '', age: '' })
+    setForm({ name: '', type: '', age: '' });
   }
 
   // Edit pet
   function handleEdit(pet) {
-    setForm({ name: pet.name, type: pet.type, age: pet.age })
-    setEditId(pet.id)
+    setForm({ name: pet.name, type: pet.type, age: pet.age });
+    setEditId(pet.id);
   }
 
   // Delete pet
@@ -52,26 +51,26 @@ function App() {
       // const res = await fetch(`/api/pets/${id}`, { method: 'DELETE' })
       // if (!res.ok) throw new Error('Network response was not ok')
       // return true
-      return true
+      return true;
     } catch (err) {
-      console.error('DynamoDB delete error:', err)
-      throw err
+      console.error('DynamoDB delete error:', err);
+      throw err;
     }
   }
 
   function handleDelete(id) {
     deletePetFromDynamoDB(id)
       .then(() => {
-        setPets(pets => pets.filter(p => p.id !== id))
+        setPets(pets => pets.filter(p => p.id !== id));
         if (editId === id) {
-          setEditId(null)
-          setForm({ name: '', type: '', age: '' })
+          setEditId(null);
+          setForm({ name: '', type: '', age: '' });
         }
       })
       .catch(err => {
-        alert('Failed to delete pet from DynamoDB')
+        alert('Failed to delete pet from DynamoDB');
         // Optionally display error in UI
-      })
+      });
   }
 
   return (
@@ -124,7 +123,7 @@ function App() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
