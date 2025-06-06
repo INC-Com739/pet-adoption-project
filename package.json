@@ -12,10 +12,12 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.821.0",
     "@aws-sdk/lib-dynamodb": "^3.821.0",
+    "bootstrap": "^5.3.6",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "react": "^19.1.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
