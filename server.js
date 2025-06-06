@@ -15,7 +15,6 @@ const SECRET_ACCESS_KEY = process.env.VITE_APP_AWS_SECRET_ACCESS_KEY;
 
 const client = new DynamoDBClient({
   region: REGION,
-  endpoint: "http://localhost:8000", // Connect to DynamoDB Local
   credentials: {
     accessKeyId: ACCESS_KEY_ID,
     secretAccessKey: SECRET_ACCESS_KEY,
