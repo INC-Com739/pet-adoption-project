@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -10,6 +10,22 @@ function App() {
   const [form, setForm] = useState({ name: '', type: '', age: '' });
   // Edit mode state
   const [editId, setEditId] = useState(null);
+
+  // Fetch all pets from backend on mount (scan)
+  useEffect(() => {
+    async function fetchPets() {
+      try {
+        // TODO: Replace with your real API endpoint
+        const res = await fetch('/api/pets');
+        if (!res.ok) throw new Error('Failed to fetch pets');
+        const data = await res.json();
+        setPets(data);
+      } catch (err) {
+        console.error('Failed to fetch pets:', err);
+      }
+    }
+    fetchPets();
+  }, []);
 
   // Handle form input changes
   function handleChange(e) {
