@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DeleteCommand, DynamoDBDocumentClient, PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import express from "express";
@@ -85,28 +84,5 @@ export async function getPetsByName(name) {
   }));
   return Items || [];
 }
-
-// Express app setup
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// GET all pets
-app.get("/api/pets", async (req, res) => {
-  try {
-    const pets = await scanPets();
-    res.json(pets);
-  } catch (err) {
-    console.error("/api/pets error:", err); // Log full error
-    res.status(500).json({ error: err.message, stack: err.stack });
-  }
-});
-
-// Other routes (POST, DELETE, etc.) would go here
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 
